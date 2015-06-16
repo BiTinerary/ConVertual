@@ -1,11 +1,11 @@
 # ConVertual
 Uses VBoxManage Commands to convert VHDD's into different extensions. (ie: .RAW, .VDI, .VHD, .VMDK) Currently works and gets the job done but the actual code is pretty gnarly. 
 
-For Reference:
-`.VDI`: VirtualBox Extension
-`.RAW`: Image output when using linux `dd` command
-`.VHD`: Windows HyperV extension
-`.VMDK`: VMWare WorksStation (*cough* garbage *cough*)
+For Reference:<br>
+`.VDI`: VirtualBox Extension<br>
+`.RAW`: Image output when using linux `dd` command<br>
+`.VHD`: Windows HyperV extension<br>
+`.VMDK`: VMWare WorksStation (*cough* garbage *cough*)<br>
 
 # General Premise:
 * Put Target Virtual HDD that you need converted into the same directory as the VBoxManage and .Py Script
