@@ -30,7 +30,7 @@ For Reference:<br>
 
 `VBoxManage internalcommands createrawvmdk -filename "%USERPROFILE%"\Desktop\usb.vmdk -rawdisk \\.\PhysicalDriveZZ` where ZZ = Disk Number 
 
-* **Batch Convert**: Convert all VHDD's (in `%CD%/BatchConvert` directory?) to a specified format. Do this by putting all applicable files into a list (`[]`), then `for loop` the list with the proper, associated one liner.
+* **Batch Convert**: Convert all VHDD's (in `%CD%/BatchConvert` directory?) to a specified format. Do this by putting all applicable files into a list (`[]`), then `for loop` it with the proper, associated one liner.
 
 
 
