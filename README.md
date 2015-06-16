@@ -14,5 +14,5 @@ Uses VBoxManage Commands to convert VHDD's into different extensions. (ie: .RAW,
 * Will be expanded to include GUI
 * Remove **hardcoded** input file name and change to accept File Selection/Open GUI window (Line 3)
 * Remove hardcoded/manual designation of input file extension, ie: prompt 2. (Line 43)
-* Condense line 45-End `if/elif/else` statements (and the beginning functions while you aat it.)
+* Condense line 45-End `if/elif/else` statements (and the beginning functions while your at it.)
 * Create classes for the 4 main formats (.RAW, .VDI, .VHD, .VMDK)
