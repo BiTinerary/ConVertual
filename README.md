@@ -16,3 +16,12 @@ Uses VBoxManage Commands to convert VHDD's into different extensions. (ie: .RAW,
 * Remove hardcoded/manual designation of input file extension, ie: prompt 2. (Line 43)
 * Condense line 45-End `if/elif/else` statements (and the beginning functions while your at it.)
 * Create classes for the 4 main formats (.RAW, .VDI, .VHD, .VMDK)
+* Include other VBoxManage functions to accomplish tasks like:
+  ~ `--resize`ing<br>
+  ~ Cloning full dynamic/static drives to bigger VHDD's<br>
+  ~ Quick create template .VHD, .VMDK, .RAW, .VDI image using frequent/preferred settings, ie: Dynamic, 50GB, etc...
+  ~ Option to create virtual drive linking to external drive/USB/disk of your choice. (doesn't create a complete copy just a small ~17kb .VHDD that allows virtual booting to the drive number) >>>
+
+`VBoxManage internalcommands createrawvmdk -filename "%USERPROFILE%"\Desktop\usb.vmdk -rawdisk \\.\PhysicalDriveZZ` where ZZ = Disk Number 
+
+
