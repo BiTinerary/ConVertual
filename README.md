@@ -5,8 +5,8 @@ Uses VBoxManage Commands to convert VHDD's into different extensions. (ie: .RAW,
 * Put Target Virtual HDD that you need converted into the same directory as the VBoxManage and .Py Script
 * You currently have to change the target VHDD name to "test"
 * Run .Py Script > It will prompt for 2 inputs.
-  1: What is the target VHDD's current extension?
-  2: What is the output extension you're converting to?
+  ~ 1: What is the target VHDD's current extension?
+  ~ 2: What is the output extension you're converting to?
 * .Py Script will convert accordingly
 
 # TODO
