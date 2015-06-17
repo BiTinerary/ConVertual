@@ -1,5 +1,10 @@
 import os
 import Tkinter as tk
+from tkFileDialog import askopenfilename
+import virtualbox
+import sys
+
+virtualbox.Session()
 
 NameOfImageHere = 'test' # Input File Name of Virtual HDD Image
 ConvertedImageName = 'convertedtest' # Output File Name of Converted Virtual HDD
@@ -23,67 +28,85 @@ class ButtonWidgets(tk.Tk): # Custom keyboard tester.
 
 		def RAWtoVDI():
 			os.system('VBoxManage convertdd "%CD%/' + '"' + NameOfImageHere + '.raw "%CD%/' + '"' + ConvertedImageName + '.vdi --format vdi')
+			sys.exit()
 		def RAWtoVHD():
 			os.system('VBoxManage convertdd "%CD%/' + '"' + NameOfImageHere + '.raw "%CD%/' + '"' + ConvertedImageName + '.vhd --format vhd')
+			sys.exit()
 		def RAWtoVMDK():
 			os.system('VBoxManage convertdd "%CD%/' + '"' + NameOfImageHere + '.raw "%CD%/' + '"' + ConvertedImageName + '.vmdk --format vmdk')
+			sys.exit()
 
 		def VDItoRAW():
 			os.system('VBoxManage clonehd "%CD%/' + '"' + NameOfImageHere + '.vdi "%CD%/' + '"' + ConvertedImageName + '.raw --format raw')
+			sys.exit()
 		def VDItoVHD():
 			os.system('VBoxManage clonehd "%CD%/' + '"' + NameOfImageHere + '.vdi "%CD%/' + '"' + ConvertedImageName + '.vhd --format vhd')
+			sys.exit()
 		def VDItoVMDK():
 			os.system('VBoxManage clonehd "%CD%/' + '"' + NameOfImageHere + '.vdi "%CD%/' + '"' + ConvertedImageName + '.vmdk --format vmdk')
+			sys.exit()
 
 		def VHDtoRAW():
 			os.system('VBoxManage clonehd "%CD%/' + '"' + NameOfImageHere + '.vhd "%CD%/' + '"' + ConvertedImageName + '.raw --format raw')
+			sys.exit()
 		def VHDtoVDI():
 			os.system('VBoxManage clonehd "%CD%/' + '"' + NameOfImageHere + '.vhd "%CD%/' + '"' + ConvertedImageName + '.vdi --format vdi')
+			sys.exit()
 		def VHDtoVMDK():
 			os.system('VBoxManage clonehd "%CD%/' + '"' + NameOfImageHere + '.vhd "%CD%/' + '"' + ConvertedImageName + '.vmdk --format vmdk')
+			sys.exit()
 
 		def VMDKtoRAW():
 			os.system('VBoxManage clonehd "%CD%/' + '"' + NameOfImageHere + '.vmdk "%CD%/' + '"' + ConvertedImageName + '.raw --format raw')
+			sys.exit()
 		def VMDKtoVDI():
 			os.system('VBoxManage clonehd "%CD%/' + '"' + NameOfImageHere + '.vmdk "%CD%/' + '"' + ConvertedImageName + '.vdi --format vdi')
+			sys.exit()
 		def VMDKToVHD():
 			os.system('VBoxManage clonehd "%CD%/' + '"' + NameOfImageHere + '.vmdk "%CD%/' + '"' + ConvertedImageName + '.vhd --format vhd')
+			sys.exit()
+
+		def OpenButtonWindow():
+			openwindow = askopenfilename()
+		
+		ButtonOpen = tk.Button(width=20, height=2, text='Select Image To Convert', command=lambda: OpenButtonWindow())
+		ButtonOpen.grid(row=0, column=2, padx=5, pady=5, columnspan=2)
 
 		ButtonOne = tk.Button(width=15, height=2, text='RAW to VDI', command=lambda: RAWtoVDI())
-		ButtonOne.grid(row=0, column=1, padx=5, pady=5)
+		ButtonOne.grid(row=1, column=1, padx=5, pady=5)
 
 		ButtonTwo = tk.Button(width=15, height=2, text='RAW to VHD', command=lambda: RAWtoVHD())
-		ButtonTwo.grid(row=1, column=1, padx=5, pady=5)
+		ButtonTwo.grid(row=2, column=1, padx=5, pady=5)
 
 		ButtonThree = tk.Button(width=15, height=2, text='RAW to VMDK', command=lambda: RAWtoVMDK())
-		ButtonThree.grid(row=2, column=1, padx=5, pady=5)
+		ButtonThree.grid(row=3, column=1, padx=5, pady=5)
 
 		ButtonFour = tk.Button(width=15, height=2, text='VDI to RAW', command=lambda: VDItoRAW())
-		ButtonFour.grid(row=0, column=2, padx=5, pady=5)
+		ButtonFour.grid(row=1, column=2, padx=5, pady=5)
 
 		ButtonFive = tk.Button(width=15, height=2, text='VDI to VHD', command=lambda: VDItoVHD())
-		ButtonFive.grid(row=1, column=2, padx=5, pady=5)
+		ButtonFive.grid(row=2, column=2, padx=5, pady=5)
 
 		ButtonSix = tk.Button(width=15, height=2, text='VDI to VMDK', command=lambda: VDItoVMDK())
-		ButtonSix.grid(row=2, column=2, padx=5, pady=5)
+		ButtonSix.grid(row=3, column=2, padx=5, pady=5)
 
 		ButtonSeven = tk.Button(width=15, height=2, text='VHD to RAW', command=lambda: VHDtoRAW())
-		ButtonSeven.grid(row=0, column=3, padx=5, pady=5)
+		ButtonSeven.grid(row=1, column=3, padx=5, pady=5)
 
 		ButtonEight = tk.Button(width=15, height=2, text='VHD to VDI', command=lambda: VHDtoVDI())
-		ButtonEight.grid(row=1, column=3, padx=5, pady=5)
+		ButtonEight.grid(row=2, column=3, padx=5, pady=5)
 
 		ButtonNine = tk.Button(width=15, height=2, text='VHD to VMDK', command=lambda: VHDtoVMDK())
-		ButtonNine.grid(row=2, column=3, padx=5, pady=5)
+		ButtonNine.grid(row=3, column=3, padx=5, pady=5)
 
 		ButtonTen = tk.Button(width=15, height=2, text='VMDK to RAW', command=lambda: VMDKtoRAW())
-		ButtonTen.grid(row=0, column=4, padx=5, pady=5)
+		ButtonTen.grid(row=1, column=4, padx=5, pady=5)
 
 		ButtonEleven = tk.Button(width=15, height=2, text='VMDK to VDI', command=lambda: VMDKtoVDI())
-		ButtonEleven.grid(row=1, column=4, padx=5, pady=5)
+		ButtonEleven.grid(row=2, column=4, padx=5, pady=5)
 
 		ButtonTwelve = tk.Button(width=15, height=2, text='VMDK to VHD', command=lambda: VMDKToVHD())
-		ButtonTwelve.grid(row=2, column=4, padx=5, pady=5)
+		ButtonTwelve.grid(row=3, column=4, padx=5, pady=5)
 
 if __name__ == "__main__":
 	root = ButtonWidgets()
