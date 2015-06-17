@@ -28,12 +28,15 @@ class ButtonWidgets(tk.Tk): # Custom keyboard tester.
 			fileName, fileExtension = os.path.splitext(InputFile)
 			BaseName = os.path.basename(InputFile)
 
-			if fileExtension.lower() in AcceptableInputs:
-				BrowseBorder = tk.Label(text=InputFile, relief='ridge', width=51, height=1)
+			if fileExtension.lower() in AcceptableInputs: #60
+				if len(InputFile) > 60:
+					BrowseBorder = tk.Label(text=InputFile, anchor='e', relief='ridge', width=51, height=1)
+				else:
+					BrowseBorder = tk.Label(text=InputFile, relief='ridge', width=51, height=1)
 				BrowseBorder.grid(row=0, column=2, padx=5, pady=5, columnspan=4)
 			else:
 				ErrorFile = BaseName + " doesn't have a valid extension!"
-				BrowseBorder = tk.Label(text=ErrorFile, relief='ridge', width=51, height=1, fg='red')
+				BrowseBorder = tk.Label(text=ErrorFile, anchor='e', relief='ridge', width=51, height=1, fg='red')
 				BrowseBorder.grid(row=0, column=2, padx=5, pady=5, columnspan=4)
 
 		def RAWConversion():
