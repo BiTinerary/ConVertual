@@ -1,4 +1,5 @@
 import os
+import Tkinter as tk
 
 NameOfImageHere = 'test' # Input File Name of Virtual HDD Image
 ConvertedImageName = 'convertedtest' # Output File Name of Converted Virtual HDD
@@ -36,46 +37,49 @@ def VMDKtoVDI():
 def VMDKToVHD():
 	os.system('VBoxManage clonehd "%CD%/' + '"' + NameOfImageHere + '.vmdk "%CD%/' + '"' + ConvertedImageName + '.vhd --format vhd')
 
-QUESTION1 = "\nWhat kind of Virtual HDD are we converting?\nAcceptable inputs: RAW, VDI, VHD, or VMDK.\n"
-INPUTFILE = raw_input(QUESTION1)
+QuestionOne = "\nWhat kind of Virtual HDD are we converting?\nAcceptable inputs: RAW, VDI, VHD, or VMDK.\n"
+InputFile = raw_input(QuestionOne)
 
-QUESTION2 = "\r\nWhat format are we converting to?\nAcceptable inputs: RAW, VDI, VHD, or VMDK.\n"
-OUTPUTFILE = raw_input(QUESTION2)
+ButtonOneQuestionOne = tk.Button(width=15, height=2, text='buttonwork?')
+ButtonOneQuestionOne.grid(row=0, column=0)
 
-if INPUTFILE.lower() == "raw" and OUTPUTFILE.lower() == "vdi":
+QuestionTwo = "\r\nWhat format are we converting to?\nAcceptable inputs: RAW, VDI, VHD, or VMDK.\n"
+OutputFile = raw_input(QuestionTwo)
+
+if InputFile.lower() == "raw" and OutputFile.lower() == "vdi":
 	RAWtoVDI()
 
-elif INPUTFILE.lower() == "raw" and OUTPUTFILE.lower() == "vhd":
+elif InputFile.lower() == "raw" and OutputFile.lower() == "vhd":
 	RAWtoVHD()
 
-elif INPUTFILE.lower() == "raw" and OUTPUTFILE.lower() == "vmdk":
+elif InputFile.lower() == "raw" and OutputFile.lower() == "vmdk":
 	RAWtoVMDK()
 
-elif INPUTFILE.lower() == "vdi" and OUTPUTFILE.lower() == "raw":
+elif InputFile.lower() == "vdi" and OutputFile.lower() == "raw":
 	VDItoRAW()
 
-elif INPUTFILE.lower() == "vdi" and OUTPUTFILE.lower() == "vhd":
+elif InputFile.lower() == "vdi" and OutputFile.lower() == "vhd":
 	VDItoVHD()
 
-elif INPUTFILE.lower() == "vdi" and OUTPUTFILE.lower() == "vmdk":
+elif InputFile.lower() == "vdi" and OutputFile.lower() == "vmdk":
 	VDItoVMDK()
 
-elif INPUTFILE.lower() == "vhd" and OUTPUTFILE.lower() == "raw":
+elif InputFile.lower() == "vhd" and OutputFile.lower() == "raw":
 	VHDtoRAW()
 
-elif INPUTFILE.lower() == "vhd" and OUTPUTFILE.lower() == "vdi":
+elif InputFile.lower() == "vhd" and OutputFile.lower() == "vdi":
 	VHDtoVDI()
 
-elif INPUTFILE.lower() == "vhd" and OUTPUTFILE.lower() == "vmdk":
+elif InputFile.lower() == "vhd" and OutputFile.lower() == "vmdk":
 	VHDtoVMDK()
 
-elif INPUTFILE.lower() == "vmdk" and OUTPUTFILE.lower() == "raw":
+elif InputFile.lower() == "vmdk" and OutputFile.lower() == "raw":
 	VMDKtoRAW()
 
-elif INPUTFILE.lower() == "vmdk" and OUTPUTFILE.lower() == "vdi":
+elif InputFile.lower() == "vmdk" and OutputFile.lower() == "vdi":
 	VMDKtoVDI()
 
-elif INPUTFILE.lower() == "vmdk" and OUTPUTFILE.lower() == "vhd":
+elif InputFile.lower() == "vmdk" and OutputFile.lower() == "vhd":
 	VMDKtoVHD()
 else:
 	print("You hace not selected a proper input/output file extension\nMust be RAW, VDI, VHD, VMDK.")
