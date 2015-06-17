@@ -26,9 +26,11 @@ class ButtonWidgets(tk.Tk): # Custom keyboard tester.
 
 			global fileExtension
 			fileName, fileExtension = os.path.splitext(InputFile)
+
+			global BaseName
 			BaseName = os.path.basename(InputFile)
 
-			if fileExtension.lower() in AcceptableInputs: #60
+			if fileExtension.lower() in AcceptableInputs:
 				if len(InputFile) > 60:
 					BrowseBorder = tk.Label(text=InputFile, anchor='e', relief='ridge', width=51, height=1)
 				else:
@@ -36,8 +38,32 @@ class ButtonWidgets(tk.Tk): # Custom keyboard tester.
 				BrowseBorder.grid(row=0, column=2, padx=5, pady=5, columnspan=4)
 			else:
 				ErrorFile = BaseName + " doesn't have a valid extension!"
-				BrowseBorder = tk.Label(text=ErrorFile, anchor='e', relief='ridge', width=51, height=1, fg='red')
+				if len(BaseName) > 40:
+					BrowseBorder = tk.Label(text=ErrorFile, anchor='e', relief='ridge', width=51, height=1, fg='red')
+				else:
+					BrowseBorder = tk.Label(text=ErrorFile, relief='ridge', width=51, height=1, fg='red')
 				BrowseBorder.grid(row=0, column=2, padx=5, pady=5, columnspan=4)
+			TargetFileButton()
+
+		def TargetFileButton():
+
+			FullConvertName = os.path.splitext(InputFile)[0] + ConvertedImageName + fileExtension
+
+			if fileExtension.lower() in AcceptableInputs:
+				if len(FullConvertName) > 60:
+					TargetBorder = tk.Label(text=FullConvertName, anchor='e', relief='ridge', width=51, height=1)
+				else:
+					TargetBorder = tk.Label(text=FullConvertName, relief='ridge', width=51, height=1)
+				TargetBorder.grid(row=1, column=2, padx=5, pady=5, columnspan=4)
+			else:
+				ErrorFile = BaseName + " doesn't have a valid extension!"
+				if len(BaseName) > 40:
+					TargetBorder = tk.Label(text=ErrorFile, anchor="e", relief='ridge', width=51, height=1, fg='red')
+				else:
+					TargetBorder = tk.Label(text=ErrorFile, relief='ridge', width=51, height=1, fg='red')
+				TargetBorder.grid(row=1, column=2, padx=5, pady=5, columnspan=4)
+
+
 
 		def RAWConversion():
 			if fileExtension.lower() == AcceptableInputs[0]:
@@ -45,7 +71,7 @@ class ButtonWidgets(tk.Tk): # Custom keyboard tester.
 			elif fileExtension.lower() == AcceptableInputs[1] or AcceptableInputs[2] or AcceptableInputs[3]:
 				os.system('VBoxManage clonehd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.raw --format raw')
 			else:
-				print "wamp wamp waaaamp"
+				return
 
 		def VDIConversion():
 			if fileExtension.lower() == AcceptableInputs[0]:
@@ -53,7 +79,7 @@ class ButtonWidgets(tk.Tk): # Custom keyboard tester.
 			elif fileExtension.lower() == AcceptableInputs[2] or AcceptableInputs[3]:
 				os.system('VBoxManage clonehd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vdi --format vdi')
 			else:
-				print "wamp wamp waaaamp"
+				return
 
 		def VHDConversion():
 			if fileExtension.lower() == AcceptableInputs[0]:
@@ -61,7 +87,7 @@ class ButtonWidgets(tk.Tk): # Custom keyboard tester.
 			elif fileExtension.lower() == AcceptableInputs[1] or AcceptableInputs[3]:
 				os.system('VBoxManage clonehd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vhd --format vhd')
 			else:
-				print "wamp wamp waaaamp"
+				return
 
 		def VMDKConversion():
 			if fileExtension.lower() == AcceptableInputs[0]:
@@ -69,25 +95,31 @@ class ButtonWidgets(tk.Tk): # Custom keyboard tester.
 			elif fileExtension.lower() == AcceptableInputs[1] or AcceptableInputs[2]:
 				os.system('VBoxManage clonehd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vmdk --format vmdk')
 			else:
-				print "wamp wamp waaaamp"
+				return
 
 		BrowseBorder = tk.Label(text="", relief='ridge', width=51, height=1)
 		BrowseBorder.grid(row=0, column=2, padx=5, pady=5, columnspan=4)
 		
-		ButtonOpen = tk.Button(width=15, height=1, text='Browse', command=lambda: OpenFileButton())
-		ButtonOpen.grid(row=0, column=1, padx=5, pady=5)
+		ButtonBrowse = tk.Button(width=15, height=1, text='Browse', command=lambda: OpenFileButton())
+		ButtonBrowse.grid(row=0, column=1, padx=5, pady=5)
+
+		ButtonTarget = tk.Button(width=15, height=1, text='Target', command=lambda: TargetFileButton())
+		ButtonTarget.grid(row=1, column=1, padx=5, pady=5)
+
+		TargetBorder = tk.Label(text="", relief='ridge', width=51, height=1)
+		TargetBorder.grid(row=1, column=2, padx=5, pady=5, columnspan=4)
 
 		ButtonOne = tk.Button(width=15, height=2, text='RAW', command=lambda: RAWConversion())
-		ButtonOne.grid(row=1, column=1, padx=5, pady=5)
+		ButtonOne.grid(row=2, column=1, padx=5, pady=5)
 
 		ButtonTwo = tk.Button(width=15, height=2, text='VDI', command=lambda: VDIConversion())
-		ButtonTwo.grid(row=1, column=2, padx=5, pady=5)
+		ButtonTwo.grid(row=2, column=2, padx=5, pady=5)
 
 		ButtonThree = tk.Button(width=15, height=2, text='VHD', command=lambda: VHDConversion())
-		ButtonThree.grid(row=1, column=3, padx=5, pady=5)
+		ButtonThree.grid(row=2, column=3, padx=5, pady=5)
 
 		ButtonFour = tk.Button(width=15, height=2, text='VMDK', command=lambda: VMDKConversion())
-		ButtonFour.grid(row=1, column=4, padx=5, pady=5)
+		ButtonFour.grid(row=2, column=4, padx=5, pady=5)
 
 if __name__ == "__main__":
 	root = ButtonWidgets()
