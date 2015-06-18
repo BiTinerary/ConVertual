@@ -16,6 +16,7 @@ class ButtonWidgets(tk.Tk): # Custom keyboard tester.
 	def __init__(self):
 		tk.Tk.__init__(self)
 
+		OraceFilePath = 'cd "C:/Program Files/Oracle/VirtualBox/" &&'
 		AcceptableInputs = ['.raw', '.vdi', '.vhd', '.vmdk']
 		ConvertedImageName = "ConvertedImage"
 		
@@ -67,33 +68,33 @@ class ButtonWidgets(tk.Tk): # Custom keyboard tester.
 
 		def RAWConversion():
 			if fileExtension.lower() == AcceptableInputs[0]:
-				os.system('VBoxManage clonehd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.raw --format raw')
+				os.system(OraceFilePath + 'VBoxManage clonehd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.raw --format raw')
 			elif fileExtension.lower() == AcceptableInputs[1] or AcceptableInputs[2] or AcceptableInputs[3]:
-				os.system('VBoxManage clonehd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.raw --format raw')
+				os.system(OraceFilePath + 'VBoxManage clonehd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.raw --format raw')
 			else:
 				return
 
 		def VDIConversion():
 			if fileExtension.lower() == AcceptableInputs[0]:
-				os.system('VBoxManage convertdd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vdi --format vdi')
+				os.system(OraceFilePath + 'VBoxManage convertdd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vdi --format vdi')
 			elif fileExtension.lower() == AcceptableInputs[2] or AcceptableInputs[3]:
-				os.system('VBoxManage clonehd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vdi --format vdi')
+				os.system(OraceFilePath + 'VBoxManage clonehd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vdi --format vdi')
 			else:
 				return
 
 		def VHDConversion():
 			if fileExtension.lower() == AcceptableInputs[0]:
-				os.system('VBoxManage convertdd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vhd --format vhd')
+				os.system(OraceFilePath + 'VBoxManage convertdd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vhd --format vhd')
 			elif fileExtension.lower() == AcceptableInputs[1] or AcceptableInputs[3]:
-				os.system('VBoxManage clonehd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vhd --format vhd')
+				os.system(OraceFilePath + 'VBoxManage clonehd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vhd --format vhd')
 			else:
 				return
 
 		def VMDKConversion():
 			if fileExtension.lower() == AcceptableInputs[0]:
-				os.system('VBoxManage convertdd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vmdk --format vmdk')
+				os.system(OraceFilePath + 'VBoxManage convertdd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vmdk --format vmdk')
 			elif fileExtension.lower() == AcceptableInputs[1] or AcceptableInputs[2]:
-				os.system('VBoxManage clonehd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vmdk --format vmdk')
+				os.system(OraceFilePath + 'VBoxManage clonehd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vmdk --format vmdk')
 			else:
 				return
 
