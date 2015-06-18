@@ -1,6 +1,6 @@
 # ConVertual
 <p align="center">
-<img src='https://github.com/BiTinerary/ConVertual/blob/master/VirtualImageConverter.gif'><br>
+<img src='https://github.com/BiTinerary/ConVertual/blob/master/ProgramImage.png'><br>
 </p>
 
 Uses VBoxManage Commands to convert VHDD's into different extensions. (ie: .RAW, .VDI, .VHD, .VMDK) Currently works and gets the job done but the actual code is pretty gnarly. 
