@@ -11,7 +11,7 @@ For Reference:<br>
 `.VHD`: Windows HyperV extension<br>
 `.VMDK`: VMWare WorksStation (*cough* garbage *cough*)<br>
 # Dependencies:
-* Windows OS w/ VirtualBox installed in default path. ie: C:\Oracle\Virtualbox\vboxmanage.exe
+* Windows OS w/ VirtualBox installed in default path. ie: C:\Oracle\Virtualbox\vboxmanage.exe<br>
 or
 * Python w/ Tkinter and Virtualbox installed in default path. C:\Oracle\Virtualbox\vboxmanage.exe
 
