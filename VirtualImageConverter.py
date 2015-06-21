@@ -3,41 +3,41 @@ import sys
 import Tkinter as tk
 from tkFileDialog import *
 
-def center(toplevel): # Function for centering all windows upon execution. This is first so that it is loaded before the creation of windows to minimize window 'flicker' upon execution.
+def center(toplevel): # Function for centering all windows upon execution.
     toplevel.update_idletasks()
-    w = toplevel.winfo_screenwidth() #function for finding resolution
-    h = toplevel.winfo_screenheight() #function for finding resolution
+    w = toplevel.winfo_screenwidth() #Find width resolution
+    h = toplevel.winfo_screenheight() #Find height resolution
     size = tuple(int(_) for _ in toplevel.geometry().split('+')[0].split('x'))
-    x = w/2 - size[0]/2 # find the middle of current resolution
-    y = h/2 - size[1]/2 # find the middle of current resolution
+    x = w/2 - size[0]/2 # find the middle of width resolution
+    y = h/2 - size[1]/2 # find the middle of height resolution
     toplevel.geometry("%dx%d+%d+%d" % (size + (x, y)))
 
-class ButtonWidgets(tk.Tk): # Custom keyboard tester.
+class ButtonWidgets(tk.Tk): # Main GUI window with buttons in line.
 	def __init__(self):
 		tk.Tk.__init__(self)
 
-		OraceFilePath = 'cd "C:/Program Files/Oracle/VirtualBox/" &&'
-		AcceptableInputs = ['.raw', '.vdi', '.vhd', '.vmdk']
-		ConvertedImageName = "ConvertedImage"
+		OraceFilePath = 'cd "C:/Program Files/Oracle/VirtualBox/" &&' # Hardcoded but default path for VirtualBox, in order to use vboxmanage.exe
+		AcceptableInputs = ['.raw', '.vdi', '.vhd', '.vmdk'] # sanitized input for the four main VHDD extensions
+		ConvertedImageName = "ConvertedImage" # Hardcoded "defaultname" + "convertedimage"
 		
 		def OpenFileButton():
 
 			global InputFile
-			InputFile = askopenfilename()
+			InputFile = askopenfilename()  # "Browse" button for selecting target image
 
 			global fileExtension
-			fileName, fileExtension = os.path.splitext(InputFile)
+			fileName, fileExtension = os.path.splitext(InputFile) # extension of target image
 
 			global BaseName
-			BaseName = os.path.basename(InputFile)
+			BaseName = os.path.basename(InputFile) # Path of target image
 
-			if fileExtension.lower() in AcceptableInputs:
-				if len(InputFile) > 60:
+			if fileExtension.lower() in AcceptableInputs: # sanitized input for target image.
+				if len(InputFile) > 60: # if file name is too long to be displayed, put leading characters off screen.
 					BrowseBorder = tk.Label(text=InputFile, anchor='e', relief='ridge', width=51, height=1)
-				else:
+				else: # else file name is shorter, center it.
 					BrowseBorder = tk.Label(text=InputFile, relief='ridge', width=51, height=1)
 				BrowseBorder.grid(row=0, column=2, padx=5, pady=5, columnspan=4)
-			else:
+			else: # sanitized input, prompting user that they've selected an extension other than the standard options.
 				ErrorFile = BaseName + " doesn't have a valid extension!"
 				if len(BaseName) > 40:
 					BrowseBorder = tk.Label(text=ErrorFile, anchor='e', relief='ridge', width=51, height=1, fg='red')
@@ -122,7 +122,7 @@ class ButtonWidgets(tk.Tk): # Custom keyboard tester.
 		ButtonFour = tk.Button(width=15, height=2, text='VMDK', command=lambda: VMDKConversion())
 		ButtonFour.grid(row=2, column=4, padx=5, pady=5)
 
-if __name__ == "__main__":
+if __name__ == "__main__": # compile the main class/widgets to be displayed on screen.
 	root = ButtonWidgets()
 	center(root)
 	root.title('Virtual Image Converter')
