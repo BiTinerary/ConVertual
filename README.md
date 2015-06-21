@@ -10,14 +10,14 @@ For Reference:<br>
 `.RAW`: Image output when using linux `dd` command<br>
 `.VHD`: Windows HyperV extension<br>
 `.VMDK`: VMWare WorksStation (*cough* garbage *cough*)<br>
+# Dependencies:
+* Windows OS w/ VirtualBox installed in default path. ie: C:\Oracle\Virtualbox\vboxmanage.exe
+or
+* Python w/ Tkinter and Virtualbox installed in default path. C:\Oracle\Virtualbox\vboxmanage.exe
 
-# General Premise:
-* Put Target Virtual HDD that you need converted into the same directory as the VBoxManage and .Py Script
-* You currently have to change the target VHDD name to "test"
-* Run .Py Script > It will prompt for 2 inputs.<br>
-  ~ 1: What is the target VHDD's current extension?<br>
-  ~ 2: What is the output extension you're converting to?<br>
-* .Py Script will convert accordingly
+# Directions:
+* Click browse, select your target virtual HDD that you need converted. The directory will be change in line.
+* Click the button corresponding to the extension you want the VHDD to be converted to. Will default to the same directory as the executable unless otherwise specified.
 
 # TODO
 * ALOT
