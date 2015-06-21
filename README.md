@@ -22,9 +22,9 @@ or
 # TODO
 * ALOT
 * <strike>Will be expanded to include GUI</strike>
-* Remove **hardcoded** input file name and change to accept File Selection/Open GUI window (Line 3)
-* Remove hardcoded/manual designation of input file extension, ie: prompt 2. (Line 43)
-* Condense line 45-End `if/elif/else` statements (and the beginning functions while your at it.)
+* <strike>Remove **hardcoded** input file name and change to accept File Selection/Open GUI window (Line 3)</strike>
+* <strike>Remove hardcoded/manual designation of input file extension, ie: prompt 2. (Line 43)</strike>
+* <strike>Condense line 45-End `if/elif/else` statements (and the beginning functions while your at it.)</strike>
 * Create classes for the 4 main formats (.RAW, .VDI, .VHD, .VMDK)
 * Include other VBoxManage functions to accomplish tasks like:<br>
   ~ `--resize`ing<br>
