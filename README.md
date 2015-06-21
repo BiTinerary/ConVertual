@@ -16,7 +16,7 @@ or
 * Python w/ Tkinter and Virtualbox installed in default path. C:\Oracle\Virtualbox\vboxmanage.exe
 
 # Directions:
-* Click browse, select your target virtual HDD that you need converted. The directory will be change in line.
+* Click browse, select your target virtual HDD that you need converted. The directory will change in line.
 * Click the button corresponding to the extension you want the VHDD to be converted to. Will default to the same directory as the executable unless otherwise specified.
 
 # TODO
