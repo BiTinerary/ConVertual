@@ -11,9 +11,9 @@ For Reference:<br>
 `.VHD`: Windows HyperV extension<br>
 `.VMDK`: VMWare WorksStation (*cough* garbage *cough*)<br>
 # Dependencies:
-* Windows OS w/ VirtualBox installed in default path. ie: C:\Oracle\Virtualbox\vboxmanage.exe<br>
+* Windows OS w/ VirtualBox installed in default path. ie: ./Oracle\Virtualbox\vboxmanage.exe<br>
 or
-* Python w/ Tkinter and Virtualbox installed in default path. C:\Oracle\Virtualbox\vboxmanage.exe
+* Python w/ Tkinter and Virtualbox installed in default path. ./Oracle\Virtualbox\vboxmanage.exe
 
 # Directions:
 * Click browse, select your target virtual HDD that you need converted. The directory will change in line.
