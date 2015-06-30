@@ -10,16 +10,20 @@ For Reference:<br>
 `.RAW`: Image output when using linux `dd` command<br>
 `.VHD`: Windows HyperV extension<br>
 `.VMDK`: VMWare WorksStation (*cough* garbage *cough*)<br>
-# Dependencies:
+## Dependencies:
 * Windows OS w/ VirtualBox installed in default path. ie: ./Oracle\Virtualbox\vboxmanage.exe<br>
 or
 * Python w/ Tkinter and Virtualbox installed in default path. ./Oracle\Virtualbox\vboxmanage.exe
 
-# Directions:
+## Directions:
 * Click browse, select your target virtual HDD that you need converted. The directory will change in line.
 * Click the button corresponding to the extension you want the VHDD to be converted to. Will default to the same directory as the executable unless otherwise specified.
 
-# TODO
+## License Agreement:
+Attribution-NonCommercial-ShareAlike 4.0 International (For Now)<br>
+<a href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>http://creativecommons.org/licenses/by-nc-sa/4.0/</a>
+
+## TODO
 * ALOT
 * <strike>Will be expanded to include GUI</strike>
 * <strike>Remove **hardcoded** input file name and change to accept File Selection/Open GUI window (Line 3)</strike>
