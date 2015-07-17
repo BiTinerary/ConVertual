@@ -3,7 +3,7 @@
 <img src='https://github.com/BiTinerary/ConVertual/blob/master/ProgramImage.png'><br>
 </p>
 
-Uses VBoxManage Commands to convert VHDD's into different extensions. (ie: .RAW, .VDI, .VHD, .VMDK) Currently works and gets the job done but the actual code is pretty gnarly. 
+Uses VBoxManage Commands to convert VHDD's into different extensions. (ie: .RAW, .VDI, .VHD, .VMDK) Currently works and gets the job done.
 
 For Reference:<br>
 `.VDI`: VirtualBox Extension<br>
