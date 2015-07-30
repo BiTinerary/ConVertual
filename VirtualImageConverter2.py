@@ -18,7 +18,9 @@ class ButtonWidgets(tk.Tk): # Main GUI window with buttons in line.
 	def __init__(self):
 		tk.Tk.__init__(self)
 
-		Vars = IntVar()
+		self.minsize(width=500, height=300)
+		self.resizable(0,0)
+		self.intvar = IntVar(self)
 
 		OracleFilePath = 'cd "C:/Program Files/Oracle/VirtualBox/" &&' # Hardcoded but default path for VirtualBox, in order to use vboxmanage.exe
 		AcceptableInputs = ['.raw', '.vdi', '.vhd', '.vmdk'] # sanitized input for the four main VHDD extensions
@@ -48,17 +50,58 @@ class ButtonWidgets(tk.Tk): # Main GUI window with buttons in line.
 				else:
 					BrowseBorder = tk.Label(text=ErrorFile, relief='ridge', width=51, height=1, fg='red')
 				BrowseBorder.grid(row=0, column=2, padx=5, pady=5, columnspan=4)
-			TargetFileButton()
+			UpdateOutputName()
 
-		def TargetFileButton():
+		def UpdateOutputName():
+			try:
+				FullNameRadioExtension = os.path.splitext(SaveAsFile)[0] + PrintConvertExtension(self.intvar.get())
+			except:
+				FullNameRadioExtension = os.path.splitext(InputFile)[0] + PrintConvertExtension(self.intvar.get())
 
-			FullConvertName = os.path.splitext(InputFile)[0] + ConvertedImageName + fileExtension
+			FullConvertName = os.path.splitext(InputFile)[0] + fileExtension
 
 			if fileExtension.lower() in AcceptableInputs:
 				if len(FullConvertName) > 60:
-					TargetBorder = tk.Label(text=FullConvertName, anchor='e', relief='ridge', width=51, height=1)
+					try:
+						TargetBorder = tk.Label(text=FullNameRadioExtension, anchor='e', relief='ridge', width=51, height=1)	
+					except:
+						TargetBorder = tk.Label(text=FullConvertName, anchor='e', relief='ridge', width=51, height=1)
 				else:
-					TargetBorder = tk.Label(text=FullConvertName, relief='ridge', width=51, height=1)
+					try:
+						TargetBorder = tk.Label(text=FullNameRadioExtension, relief='ridge', width=51, height=1)
+					except:
+						TargetBorder = tk.Label(text=FullConvertName, relief='ridge', width=51, height=1)
+					TargetBorder.grid(row=1, column=2, padx=5, pady=5, columnspan=4)
+			else:
+				ErrorFile = BaseName + " doesn't have a valid extension!"
+				if len(BaseName) > 40:
+					TargetBorder = tk.Label(text=ErrorFile, anchor="e", relief='ridge', width=51, height=1, fg='red')
+				else:
+					TargetBorder = tk.Label(text=ErrorFile, relief='ridge', width=51, height=1, fg='red')
+				TargetBorder.grid(row=1, column=2, padx=5, pady=5, columnspan=4)
+
+		def SaveAsButton():
+			global SaveAsFile
+			SaveAsFile = asksaveasfilename()
+			print "SAVE AS FILE" + SaveAsFile
+
+			FullNameRadioExtension = os.path.splitext(SaveAsFile)[0] + PrintConvertExtension(self.intvar.get())
+			print "NAME RADIO" + FullNameRadioExtension
+
+			FullConvertName = os.path.splitext(SaveAsFile)[0] + fileExtension
+			print "FULL CONV NAME" + FullConvertName
+
+			if fileExtension.lower() in AcceptableInputs:
+				if len(FullConvertName) > 60:
+					try:
+						TargetBorder = tk.Label(text=FullNameRadioExtension, anchor='e', relief='ridge', width=51, height=1)	
+					except:
+						TargetBorder = tk.Label(text=FullConvertName, anchor='e', relief='ridge', width=51, height=1)
+				else:
+					try:
+						TargetBorder = tk.Label(text=FullNameRadioExtension, relief='ridge', width=51, height=1)
+					except:
+						TargetBorder = tk.Label(text=FullConvertName, relief='ridge', width=51, height=1)
 				TargetBorder.grid(row=1, column=2, padx=5, pady=5, columnspan=4)
 			else:
 				ErrorFile = BaseName + " doesn't have a valid extension!"
@@ -99,41 +142,97 @@ class ButtonWidgets(tk.Tk): # Main GUI window with buttons in line.
 				os.system(OracleFilePath + 'VBoxManage clonehd ' + InputFile + ' "%CD%/"' + ConvertedImageName + '.vmdk --format vmdk')
 			else:
 				return
-		
+
+		"""
+		def RAWConversion():
+			if fileExtension.lower() == AcceptableInputs[0]:
+				os.system(OracleFilePath + 'VBoxManage clonehd ' + InputFile + ' "%CD%/"' + SaveAsFile + '.raw --format raw')
+			elif fileExtension.lower() == AcceptableInputs[1] or AcceptableInputs[2] or AcceptableInputs[3]:
+				os.system(OracleFilePath + 'VBoxManage clonehd ' + InputFile + ' "%CD%/"' + SaveAsFile + '.raw --format raw')
+			else:
+				return
+
+		def VDIConversion():
+			if fileExtension.lower() == AcceptableInputs[0]:
+				os.system(OracleFilePath + 'VBoxManage convertdd ' + InputFile + ' "%CD%/"' + SaveAsFile + '.vdi --format vdi')
+			elif fileExtension.lower() == AcceptableInputs[2] or AcceptableInputs[3]:
+				os.system(OracleFilePath + 'VBoxManage clonehd ' + InputFile + ' "%CD%/"' + SaveAsFile + '.vdi --format vdi')
+			else:
+				return
+
+		def VHDConversion():
+			if fileExtension.lower() == AcceptableInputs[0]:
+				os.system(OracleFilePath + 'VBoxManage convertdd ' + InputFile + ' "%CD%/"' + SaveAsFile + '.vhd --format vhd')
+			elif fileExtension.lower() == AcceptableInputs[1] or AcceptableInputs[3]:
+				os.system(OracleFilePath + 'VBoxManage clonehd ' + InputFile + ' "%CD%/"' + SaveAsFile + '.vhd --format vhd')
+			else:
+				return
+
+		def VMDKConversion():
+			if fileExtension.lower() == AcceptableInputs[0]:
+				os.system(OracleFilePath + 'VBoxManage convertdd ' + InputFile + ' "%CD%/"' + SaveAsFile + '.vmdk --format vmdk')
+			elif fileExtension.lower() == AcceptableInputs[1] or AcceptableInputs[2]:
+				os.system(OracleFilePath + 'VBoxManage clonehd ' + InputFile + ' "%CD%/"' + SaveAsFile + '.vmdk --format vmdk')
+			else:
+				return
+		"""
+
+		def PrintConvertExtension(x):
+			if x == 0:
+				return ".raw"
+			elif x == 1:
+				return ".vdi"
+			elif x == 2:
+				return ".vhd"
+			elif x == 3:
+				return ".vmdk"
+			else:
+				return None
+
+		def ConvertOption(x):
+			if x == 0:
+				RAWConversion()
+			elif x == 1:
+				VDIConversion()
+			elif x == 2:
+				VHDConversion()
+			elif self.intvar.get() == 3:
+				VMDKConversion()
+			else:
+				return
+
 		def VirtualBootUSB():
 			os.system(OracleFilePath + 'VBoxManage internalcommands createrawvmdk -filename "%USERPROFILE%"\Desktop\VirtualUSB.vdi -rawdisk //./PhysicalDrive2')
 
 		BrowseBorder = tk.Label(text="", relief='ridge', width=51, height=1)
 		BrowseBorder.grid(row=0, column=2, padx=5, pady=5, columnspan=4)
+
+		TargetBorder = tk.Label(text="", relief='ridge', width=51, height=1)
+		TargetBorder.grid(row=1, column=2, padx=5, pady=5, columnspan=4)
 		
 		ButtonBrowse = tk.Button(width=15, height=1, text='Browse', command=lambda: OpenFileButton())
 		ButtonBrowse.grid(row=0, column=1, padx=5, pady=5)
 
-		ButtonTarget = tk.Button(width=15, height=1, text='Target', command=lambda: TargetFileButton())
+		ButtonTarget = tk.Button(width=15, height=1, text='Save As', command=lambda: SaveAsButton())
 		ButtonTarget.grid(row=1, column=1, padx=5, pady=5)
 
-		TargetBorder = tk.Label(text="", relief='ridge', width=51, height=1)
-		TargetBorder.grid(row=1, column=2, padx=5, pady=5, columnspan=4)
+		ButtonOne = tk.Radiobutton(text='RAW', value=0, variable=self.intvar, command=lambda:UpdateOutputName())
+		ButtonOne.place(x=60, y=80)
 
-		ButtonOne = tk.Radiobutton(width=10, height=2, variable=Vars, value=1, text='RAW', command=lambda: RAWConversion())
-		ButtonOne.place(x=5000, y=5000)
-		#ButtonOne.grid(row=2, column=1, padx=5, pady=5)
-		ButtonOne.select()
+		ButtonTwo = tk.Radiobutton(text='VDI', value=1, variable=self.intvar, command=lambda:UpdateOutputName())
+		ButtonTwo.place(x=170, y=80)
 
-		ButtonTwo = tk.Radiobutton(width=10, height=2, variable=Vars, value=2, text='VDI', command=lambda: VDIConversion())
-		#ButtonTwo.grid(row=2, column=2, padx=5, pady=5)
+		ButtonThree = tk.Radiobutton(text='VHD', value=2, variable=self.intvar, command=lambda:UpdateOutputName())
+		ButtonThree.place(x=270, y=80)
 
-		ButtonThree = tk.Radiobutton(width=10, height=2, variable=Vars, value=3, text='VHD', command=lambda: VHDConversion())
-		#ButtonThree.grid(row=2, column=3, padx=5, pady=5)
+		ButtonFour = tk.Radiobutton(text='VMDK', value=3, variable=self.intvar, command=lambda:UpdateOutputName())
+		ButtonFour.place(x=370, y=80)
 
-		ButtonFour = tk.Radiobutton(width=10, height=2, variable=Vars, value=4, text='VMDK', command=lambda: VMDKConversion())
-		#ButtonFour.grid(row=2, column=4, padx=5, pady=5)
+		ConvertButton = tk.Button(text='Convert!', width=67, height=2, command=lambda: ConvertOption(self.intvar.get()))
+		ConvertButton.place(x=8, y=117)
 
-		LabelVirtualUSB = tk.Canvas(height=1, width=489, bg='gray')
-		LabelVirtualUSB.grid(row=3, column=1, padx=1, pady=1, columnspan=4)
-
-		ButtonUSB = tk.Radiobutton(width=25, height=2, text='Create Bootable .VDI from USB')
-		ButtonUSB.grid(row=4, column=2, padx=0, pady=5, columnspan=2)
+		LabelVirtualUSB = tk.Canvas(height=1, width=490, bg='gray')
+		LabelVirtualUSB.place(x=2,y=170)
 
 if __name__ == "__main__": # compile the main class/widgets to be displayed on screen.
 	root = ButtonWidgets()
